@@ -1,0 +1,25 @@
+🎯 Purpose: Make Description required for Designed and To Do states
+
+Name	"5a_Description Required for Designed"
+
+Conditions (When)
+✅	A work item state changes to .. 
+✅	Field  Designed
+
+Actions (Then)
+✅	Make required ...
+✅	Field  Description
+Final:
+Click Save
+
+Name	"5b_Description Required for To Do"
+
+Conditions (When)
+✅	A work item state changes to .. 
+✅	Field  To Do
+
+Actions (Then)
+✅	Make required ...
+✅	Field  Description
+Final:
+Click Save

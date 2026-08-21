@@ -1,0 +1,20 @@
+
+- Purpose: Make Repro Steps required for Bugs
+- Important: Switch to Bug Work Item Type
+- Go to Process → Work Item Types → Bug
+- Go to Rules tab
+- Click Add rule
+
+Name "9_Repro Steps Required for Bug" (For Bug WIT)
+
+Conditions (When)
+✅	A work item state changes to ...
+✅	Field  Commited
+
+Actions (Then)
+✅	Make required ...
+✅	Field Repro Steps
+Final:
+Click Save
+
+

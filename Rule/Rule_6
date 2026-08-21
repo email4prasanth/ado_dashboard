@@ -1,0 +1,46 @@
+Purpose: Require senior approval for high-priority items
+PBI_05
+
+Prerequisite: Create a custom field
+First, you need to create the "SeniorApproved" field:
+
+Go to Process → Work Item Types → Product Backlog Item
+
+Go to Fields tab
+
+Click Add field
+
+Fill:
+
+Field Name: SeniorApproved
+
+
+Type: Identity (to select users)
+
+Required: Optional
+
+Click Save
+
+Now Configure the Rule:
+Name	"6a_Senior Approval for Priority 1-Commited"
+
+Condition: A work item state changes to ... → Committed
+Actions (Then)
+✅	Make required ...
+✅	Field SeniorApproved
+Click Save
+
+Name	"6b_Senior Approval for Priority 1 - Active"
+Conditions (When)
+Condition: A work item state changes to ... →  Active
+✅	Make required ...
+✅	Field SeniorApproved
+Click Save
+
+Name	"6c_Senior Approval for Priority 1 - Inprogress"
+Conditions (When)
+Condition: A work item state changes to ... →  Inprogress
+✅	Make required ...
+✅	Field SeniorApproved
+Click Save
+

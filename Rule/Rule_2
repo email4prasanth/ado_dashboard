@@ -1,0 +1,12 @@
+Purpose: Make Acceptance Criteria required when moving to Resolved state
+PBI-01
+
+Name	2_Acceptance Criteria Required for Resolved
+Conditions (When):
+✅	A work item state changes to ...
+✅	Field On Hold (your Resolved state)
+Actions (Then):
+✅	Make required ...
+✅	Field  Acceptance Criteria
+Final:
+Click Save

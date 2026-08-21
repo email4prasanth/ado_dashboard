@@ -1,0 +1,31 @@
+Purpose: Make Assigned To mandatory when moving to any In Progress state
+
+Name	"1_cAssigned To Required for In Progress"
+Conditions (When)
+✅	A work item state changes to .. 
+✅	Field  In Progress (category) OR individual states: Committed, Active, In planning, In progress, Ready
+Actions (Then)
+✅	Make required ...
+✅	Field  Assigned To
+Final:
+Click Save
+
+Name	"1a_Assigned To Required for In Committed"
+Conditions (When)
+✅	A work item state changes to .. 
+✅	Field  In Committed (category) 
+Actions (Then)
+✅	Make required ...
+✅	Field  Assigned To
+Final:
+Click Save
+
+Name	"1b_Assigned To Required for In Active"
+Conditions (When)
+✅	A work item state changes to .. 
+✅	Field  In Active(category) 
+Actions (Then)
+✅	Make required ...
+✅	Field  Assigned To
+Final:
+Click Save

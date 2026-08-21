@@ -1,0 +1,11 @@
+Name	"8a_Block Moving Back from On Hold"
+Conditions (When)
+Condition: A work item state moved from... →  On Hold
+Actions: Restrict the transition to state.. → New
+
+Actions: Restrict the transition to state.. → Approved
+
+Actions: Restrict the transition to state.. → Designed
+
+Actions: Restrict the transition to state.. → To Do
+Click Save

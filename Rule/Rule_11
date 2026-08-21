@@ -1,0 +1,21 @@
+Name	11a_Lock Committed to Assigned User
+Conditions (When)
+✅	A work item state is ...
+✅	Field  Committed
+
+Actions (Then)
+✅	
+✅ 
+Final: 
+Click Save
+
+
+Conditions (When)
+✅	
+✅	Field  
+
+Actions (Then)
+✅	
+✅	Field 
+Final:
+Click Save
