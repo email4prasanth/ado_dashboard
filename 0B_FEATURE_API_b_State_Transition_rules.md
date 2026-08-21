@@ -1,57 +1,117 @@
-# Azure DevOps API rule: Feature state transition from New
+# Azure DevOps API rules: Feature state transitions
 
-This rule allows a Feature in **New** to transition only to **Approved** or
-**Removed**.
+## State mapping
 
-## Azure DevOps UI configuration
+| Feature state |
+| --- |
+| New |
+| Approved |
+| In Progress |
+| On Hold |
+| Ready to Release |
+| Completed |
+| Removed |
 
-1. Create a rule named **Restrict From New**.
-2. Under **When**, select **A work item state moved from...** and choose
-   **New**.
-3. Under **Then**, select **Restrict the state transition to...** for each of
-   these states:
-   - New
-   - In Progress
-   - On Hold
-   - Ready for Release
-   - Done
+## Transition rules
 
-Do not restrict **Approved** or **Removed**; these are the only allowed
-destination states.
+| Rule name | Source state | Allowed destinations | Restricted destinations |
+| --- | --- | --- | --- |
+| Restrict From New | New | Approved, Removed | New, In Progress, On Hold, Ready to Release, Completed |
+| Restrict From Approved | Approved | In Progress, Removed | New, Approved, On Hold, Ready to Release, Completed |
+| Restrict From In Progress | In Progress | On Hold, Ready to Release, Completed, Removed | New, Approved, In Progress |
+| Restrict From On Hold | On Hold | In Progress, Removed | New, Approved, On Hold, Ready to Release, Completed |
+| Restrict From Ready to Release | Ready to Release | Completed, Removed | New, Approved, In Progress, On Hold, Ready to Release |
+| Restrict From Completed | Completed | None (end state) | New, Approved, In Progress, On Hold, Ready to Release, Completed, Removed |
+| Restrict From Removed | Removed | None (end state) | New, Approved, In Progress, On Hold, Ready to Release, Completed, Removed |
+
+For every rule, select **A work item state moved from...** under **When** and
+choose the source state. Under **Then**, add **Restrict the state transition
+to...** for every restricted destination shown in the table.
 
 ## Run in PowerShell
 
-Run the setup in `0B_FEATURE_API_a_Setup.md` first, or run both code blocks in
-the same PowerShell session. This script uses the `$headers`, `$rulesUri`, and
-state information created by that setup.
+First run the setup block in `0B_FEATURE_API_a_Setup.md`. Then run this entire
+code block in the same PowerShell session. Do not execute partial selections.
 
 ```powershell
-$ruleName = 'Restrict From New'
-$sourceState = 'New'
-$allowedStates = @('Approved', 'Removed')
+# Refresh the Feature states from Azure DevOps.
+$states = Invoke-RestMethod -Uri $statesUri -Method Get -Headers $headers
+$stateNames = @($states.value.name)
 
-# Read the states returned by the setup script and calculate every destination
-# that must be restricted. This keeps Ready for Release and any other configured
-# Feature state from being accidentally omitted.
-$notAllowedStates = @(
-    $stateNames | Where-Object { $_ -notin $allowedStates }
+$featureStates = @(
+    'New',
+    'Approved',
+    'In Progress',
+    'On Hold',
+    'Ready to Release',
+    'Completed',
+    'Removed'
 )
 
-if ($notAllowedStates.Count -eq 0) {
-    throw 'No restricted destination states were found.'
+$missingFeatureStates = @(
+    $featureStates | Where-Object { $_ -notin $stateNames }
+)
+
+if ($missingFeatureStates.Count -gt 0) {
+    throw "Missing Feature states: $($missingFeatureStates -join ', ')"
 }
 
-# Make the script safe to run repeatedly. A rule with the same name is not
-# created a second time.
+$ruleDefinitions = @(
+    @{
+        name    = 'Restrict From New'
+        source  = 'New'
+        allowed = @('Approved', 'Removed')
+    }
+    @{
+        name    = 'Restrict From Approved'
+        source  = 'Approved'
+        allowed = @('In Progress', 'Removed')
+    }
+    @{
+        name    = 'Restrict From In Progress'
+        source  = 'In Progress'
+        allowed = @('On Hold', 'Ready to Release', 'Completed', 'Removed')
+    }
+    @{
+        name    = 'Restrict From On Hold'
+        source  = 'On Hold'
+        allowed = @('In Progress', 'Removed')
+    }
+    @{
+        name    = 'Restrict From Ready to Release'
+        source  = 'Ready to Release'
+        allowed = @('Completed', 'Removed')
+    }
+    @{
+        name    = 'Restrict From Completed'
+        source  = 'Completed'
+        allowed = @()
+    }
+    @{
+        name    = 'Restrict From Removed'
+        source  = 'Removed'
+        allowed = @()
+    }
+)
+
+# Existing rules with the same name are skipped.
 $existingRules = Invoke-RestMethod -Uri $rulesUri -Method Get -Headers $headers
-$existingRule = $existingRules.value |
-    Where-Object { $_.name -eq $ruleName } |
-    Select-Object -First 1
 
-if ($existingRule) {
-    Write-Host "Rule already exists; skipped: $ruleName" -ForegroundColor Yellow
-}
-else {
+foreach ($definition in $ruleDefinitions) {
+    $existingRule = $existingRules.value |
+        Where-Object { $_.name -eq $definition.name } |
+        Select-Object -First 1
+
+    if ($existingRule) {
+        Write-Host "Rule already exists; skipped: $($definition.name)" `
+            -ForegroundColor Yellow
+        continue
+    }
+
+    $notAllowedStates = @(
+        $featureStates | Where-Object { $_ -notin $definition.allowed }
+    )
+
     $actions = @(
         $notAllowedStates | ForEach-Object {
             @{
@@ -62,26 +122,31 @@ else {
         }
     )
 
+    # The condition requires the exact display name returned by Azure DevOps.
+    $sourceState = $states.value |
+        Where-Object { $_.name -eq $definition.source } |
+        Select-Object -First 1
+    $sourceConditionValue = [string]$sourceState.name
+
+    if ([string]::IsNullOrWhiteSpace($sourceConditionValue)) {
+        throw "Condition value could not be resolved for '$($definition.source)'."
+    }
+
     $rule = @{
-        name       = $ruleName
+        name       = $definition.name
         isDisabled = $false
         conditions = @(
             @{
                 conditionType = 'whenWas'
                 field         = 'System.State'
-                value         = $sourceState
+                value         = $sourceConditionValue
             }
         )
         actions = $actions
     }
 
     $ruleBody = $rule | ConvertTo-Json -Depth 10
-
-    # Display the request body and reject invalid $-prefixed enum values.
     $ruleBody
-    if ($ruleBody -match '"(?:conditionType|actionType)"\s*:\s*"\$') {
-        throw 'Rule JSON contains an invalid $-prefixed enum value.'
-    }
 
     try {
         $result = Invoke-RestMethod `
@@ -96,7 +161,7 @@ else {
         Write-Host "Rule ID: $($result.id)"
     }
     catch {
-        Write-Host "Error creating rule '$ruleName': $($_.Exception.Message)" `
+        Write-Host "Error creating rule '$($definition.name)': $($_.Exception.Message)" `
             -ForegroundColor Red
 
         if ($_.ErrorDetails.Message) {
