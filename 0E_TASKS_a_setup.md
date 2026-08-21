@@ -80,7 +80,7 @@ $statesUri = "https://dev.azure.com/$organization/_apis/work/processes/$processI
 $states = Invoke-RestMethod -Uri $statesUri -Method Get -Headers $headers
 $states.value | Format-Table name, stateCategory, customizationType
 
-$requiredStates = @('New', 'Approved', 'In Progress', 'On Hold', 'Done', 'Removed')
+$requiredStates = @('New', 'To Do', 'In Progress', 'On Hold', 'Done', 'Removed')
 $stateNames = @($states.value.name)
 $missingStates = @($requiredStates | Where-Object { $_ -notin $stateNames })
 
