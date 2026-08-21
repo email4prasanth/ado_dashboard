@@ -48,19 +48,19 @@
 
 3. **Restrict From Ready for Dev**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for Dev
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Dev In Progress, Refinement, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Dev In Progress, Refinement, On Hold, Removed only
 
 4. **Restrict From Dev In Progress**
    - Under When, select "A work item state moved from..." and choose Ready for Dev In Progress
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Code Review, Ready for Dev, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Code Review, Ready for Dev, On Hold, Removed only
 
 5. **Restrict From Code Review**
    - Under When, select "A work item state moved from..." and choose Ready for Code Review
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for QA, Dev In Progress, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for QA, Dev In Progress, On Hold, Removed only
 
 6. **Restrict From Ready for QA**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for QA
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except QA In Progress, Code Review, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except QA In Progress, Code Review, On Hold, Removed only
 
 7. **Restrict From QA In Progress**
    - Under When, select "A work item state moved from..." and choose Ready for QA In Progress
@@ -72,15 +72,15 @@
 
 9. **Restrict From Ready for Pre-prod**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for Pre-prod
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Prod, QA In Progress, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Prod, QA In Progress, On Hold, Removed only
 
 10. **Restrict From Ready for Prod**
     - Under When, select "A work item state moved from..." and choose Ready for Ready for Prod
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Closed, Ready for Pre-prod, Removed only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Closed, Ready for Pre-prod, On Hold, Removed only
 
 11. **Restrict From Closed**
     - Under When, select "A work item state moved from..." and choose Ready for Closed
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Reopened only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Reopened, Removed, Rejected, Deferred only
 
 12. **Restrict From Reopened**
     - Under When, select "A work item state moved from..." and choose Ready for Reopened
@@ -88,11 +88,11 @@
 
 13. **Restrict From Rejected**
     - Under When, select "A work item state moved from..." and choose Ready for Rejected
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except New, Refinement only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except New, Refinement, Removed, Deferred only
 
 14. **Restrict From Deferred**
     - Under When, select "A work item state moved from..." and choose Ready for Deferred
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Refinement, Ready for Dev only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Refinement, Ready for Dev, New, Removed only
 ```
 ## USER STORY - Field Validation Rules
 ```sh
