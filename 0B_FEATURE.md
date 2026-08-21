@@ -13,8 +13,8 @@
     - On Hold 
     - Ready for Release 
     
-- Done
-    - Done 
+- Completed
+    - Completed
     
 - Removed
     - Removed 
@@ -32,7 +32,7 @@
 
 3. **Restrict From In Progress**
    - Under When, select "A work item state moved from..." and choose Ready for In Progress
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except On Hold, Ready for Release, Done, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except On Hold, Ready for Release, Completed, Removed only
 
 4. **Restrict From On Hold**
    - Under When, select "A work item state moved from..." and choose Ready for On Hold
@@ -40,10 +40,10 @@
 
 5. **Restrict From Ready for Release**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for Release
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Done, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Completed, Removed only
 
-6. **Restrict From Done**
-   - Under When, select "A work item state moved from..." and choose Ready for Done
+6. **Restrict From Completed**
+   - Under When, select "A work item state moved from..." and choose Ready for Completed
    - Under Then, select "Restrict the state transition to..." should NOT be allowed except No transitions (End State)
 
 7. **Restrict From Removed**
@@ -81,8 +81,8 @@
       - Make required ... - Description, Acceptance Criteria, Release Notes
       - Make read only ... Assigned To, Priority, Effort, Business Value, Time Criticality, Value Area, SeniorApprovedBy, Senior Approval Status
 
-13. **Require Rules for Done**
-    - A work item state changes to ..  State is Done
+13. **Require Rules for Completed**
+    - A work item state changes to ..  State is Completed
     - Then:
       - Make required ... - Acceptance Criteria
       - Clear the value of ...  Description
