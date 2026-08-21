@@ -24,6 +24,37 @@
     - Rejected  *
     - Deferred  *
 ```
+- under layout click new filed -- 
+creat new field 
+### Reopen Reason
+```text
+Name: Reopen Reason
+Type: single line (text)
+Required: No
+Default: None
+Values: Pending, Approved, Rejected
+```
+or use exisitng field Reopen Reason and add.
+
+### Rejection Reason
+```text
+Name: Rejection Reason
+Type: single line (text)
+Required: No
+Default: None
+Values: Pending, Approved, Rejected
+```
+or use exisitng field Rejection Reason and add
+
+### Deferral Reason
+```text
+Name: Deferral Reason
+Type: single line (text)
+Required: No
+Default: None
+Values: Pending, Approved, Rejected
+```
+or use exisitng field Deferral Reason and add
 ###  Rules
 
 - Click "New Rule".
