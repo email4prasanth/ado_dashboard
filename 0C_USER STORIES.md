@@ -71,59 +71,59 @@ or use exisitng field Deferral Reason and add
 
 1. **Restrict From New**
    - Under When, select "A work item state moved from..." and choose Ready for New
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Refinement, Ready for Dev, Dev In Progress, Code Review, Ready for QA, QA In Progress, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Refinement', 'Ready for Dev', 'Dev In Progress', 'Code Review', 'Ready for QA', 'QA In Progress', 'Removed', 'On Hold', 'Closed' only
 
 2. **Restrict From Refinement**
    - Under When, select "A work item state moved from..." and choose Ready for Refinement
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Dev, Removed (Rejected, Deferred) only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Ready for Dev', 'Dev In Progress', 'On Hold', 'Removed', 'Rejected', 'Deferred', 'Closed', 'Reopened'
 
 3. **Restrict From Ready for Dev**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for Dev
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Dev In Progress, Refinement, On Hold, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Dev In Progress', 'Refinement', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Code Review', 'Reopened'
 
 4. **Restrict From Dev In Progress**
    - Under When, select "A work item state moved from..." and choose Ready for Dev In Progress
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Code Review, Ready for Dev, On Hold, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Code Review', 'Ready for Dev', 'Ready for QA', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected'
 
 5. **Restrict From Code Review**
    - Under When, select "A work item state moved from..." and choose Ready for Code Review
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for QA, Dev In Progress, On Hold, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Ready for QA', 'Dev In Progress', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened'
 
 6. **Restrict From Ready for QA**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for QA
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except QA In Progress, Code Review, On Hold, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'QA In Progress', 'Code Review', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened'
 
 7. **Restrict From QA In Progress**
    - Under When, select "A work item state moved from..." and choose Ready for QA In Progress
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Pre-prod, Ready for QA, Code Review, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for 'Ready for Pre-prod', 'Ready for QA', 'Code Review', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened'
 
 8. **Restrict From On Hold**
    - Under When, select "A work item state moved from..." and choose Ready for On Hold
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Dev, Dev In Progress, Code Review, Ready for QA, QA In Progress, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Ready for Dev', 'Dev In Progress', 'Code Review', 'Ready for QA', 'QA In Progress', 'Removed', 'Duplicate', 'Closed', 'Rejected'
 
 9. **Restrict From Ready for Pre-prod**
    - Under When, select "A work item state moved from..." and choose Ready for Ready for Pre-prod
-   - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Prod, QA In Progress, On Hold, Removed only
+   - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Ready for Prod', 'Code Review', 'QA In Progress', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected'
 
 10. **Restrict From Ready for Prod**
     - Under When, select "A work item state moved from..." and choose Ready for Ready for Prod
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Closed, Ready for Pre-prod, On Hold, Removed only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Refinement','Closed', 'Ready for Pre-prod', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened'
 
 11. **Restrict From Closed**
     - Under When, select "A work item state moved from..." and choose Ready for Closed
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Reopened, Removed, Rejected, Deferred only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'New', 'Refinement','Reopened', 'Removed', 'Rejected', 'Deferred', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod'
 
 12. **Restrict From Reopened**
     - Under When, select "A work item state moved from..." and choose Ready for Reopened
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Ready for Dev, Dev In Progress, Code Review, Ready for QA, QA In Progress, Closed only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'Ready for Dev', 'Dev In Progress', 'Code Review', 'Ready for QA', 'QA In Progress', 'Closed', 'Duplicate', 'Rejected'
 
 13. **Restrict From Rejected**
     - Under When, select "A work item state moved from..." and choose Ready for Rejected
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except New, Refinement, Removed, Deferred only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'New', 'Refinement', 'Removed', 'Deferred', 'Duplicate', 'Closed', 'Reopened', 'Ready for Pre-prod'
 
 14. **Restrict From Deferred**
     - Under When, select "A work item state moved from..." and choose Ready for Deferred
-    - Under Then, select "Restrict the state transition to..." should NOT be allowed except Refinement, Ready for Dev, New, Removed only
+    - Under Then, select "Restrict the state transition to..." should NOT be allowed except 'New', 'Refinement', 'Ready for Dev', 'New', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod'
 ```
 ## USER STORY - Field Validation Rules
 ```sh

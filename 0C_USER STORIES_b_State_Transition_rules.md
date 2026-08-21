@@ -60,7 +60,7 @@ without partial updates when a rule exceeds Azure DevOps's action limit.
 ```powershell
 $configuredStates = @(
     'New',
-    'Triaged',
+    'Refinement',
     'Ready for Dev',
     'Dev In Progress',
     'Code Review',
@@ -81,19 +81,19 @@ $ruleDefinitions = @(
         name = 'Restrict From New'
         source = 'New'
         allowed = @(
-            'Triaged', 'Ready for Dev', 'Dev In Progress', 'Code Review',
+            'Refinement', 'Ready for Dev', 'Dev In Progress', 'Code Review',
             'Ready for QA', 'QA In Progress', 'Removed', 'On Hold', 'Closed'
         )
     }
     @{
-        name = 'Restrict From Triaged'
-        source = 'Triaged'
+        name = 'Restrict From Refinement'
+        source = 'Refinement'
         allowed = @('Ready for Dev', 'Dev In Progress', 'On Hold', 'Removed', 'Rejected', 'Deferred', 'Closed', 'Reopened')
     }
     @{
         name = 'Restrict From Ready for Dev'
         source = 'Ready for Dev'
-        allowed = @('Dev In Progress', 'Triaged', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Code Review', 'Reopened')
+        allowed = @('Dev In Progress', 'Refinement', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Code Review', 'Reopened')
     }
     @{
         name = 'Restrict From Dev In Progress'
@@ -133,12 +133,12 @@ $ruleDefinitions = @(
     @{
         name = 'Restrict From Ready for Prod'
         source = 'Ready for Prod'
-        allowed = @('Triaged','Closed', 'Ready for Pre-prod', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened')
+        allowed = @('Refinement','Closed', 'Ready for Pre-prod', 'On Hold', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Reopened')
     }
     @{
         name = 'Restrict From Closed'
         source = 'Closed'
-        allowed = @('New', 'Triaged','Reopened', 'Removed', 'Rejected', 'Deferred', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod')
+        allowed = @('New', 'Refinement','Reopened', 'Removed', 'Rejected', 'Deferred', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod')
     }
     @{
         name = 'Restrict From Reopened'
@@ -151,12 +151,12 @@ $ruleDefinitions = @(
     @{
         name = 'Restrict From Rejected'
         source = 'Rejected'
-        allowed = @('New', 'Triaged', 'Removed', 'Deferred', 'Duplicate', 'Closed', 'Reopened', 'Ready for Pre-prod')
+        allowed = @('New', 'Refinement', 'Removed', 'Deferred', 'Duplicate', 'Closed', 'Reopened', 'Ready for Pre-prod')
     }
     @{
         name = 'Restrict From Deferred'
         source = 'Deferred'
-        allowed = @('New', 'Triaged', 'Ready for Dev', 'New', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod')
+        allowed = @('New', 'Refinement', 'Ready for Dev', 'New', 'Removed', 'Duplicate', 'Closed', 'Rejected', 'Ready for Pre-prod')
     }
 )
 
