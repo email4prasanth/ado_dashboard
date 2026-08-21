@@ -6,7 +6,6 @@
 # Required configuration
 $pat = 'YOUR-PERSONAL-ACCESS-TOKEN'
 $organization = 'inlai-projects'
-$processId = 'f930013b-904c-435a-8630-d04432eedac9'
 
 # Create the authorization header.
 $base64AuthInfo = [Convert]::ToBase64String(
@@ -16,6 +15,15 @@ $headers = @{
     Authorization = "Basic $base64AuthInfo"
     Accept        = 'application/json'
 }
+# API URL to list all processes
+$uri = "https://dev.azure.com/$organization/_apis/process/processes?api-version=7.0"
+
+# Make the API call
+$result = Invoke-RestMethod -Uri $uri -Headers @{Authorization=("Basic $base64AuthInfo")} -Method Get
+
+# Output the list of processes with their IDs and Names
+$result.value | Select-Object name, id, typeId
+$processId = $result.value | Where-Object { $_.name -eq "Scrum Hybrid Governance" } | Select-Object -ExpandProperty id
 
 # Discover the real Feature reference name. An inherited Feature commonly uses
 # Microsoft.VSTS.WorkItemTypes.Feature rather than ScrumHybridGovernance.Feature.
