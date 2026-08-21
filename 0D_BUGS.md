@@ -86,6 +86,7 @@
 15. **Restrict From Deferred**
     - Under When, select "A work item state moved from..." and choose Ready for Deferred
     - Under Then, select "Restrict the state transition to..." should NOT be allowed except Triaged, Ready for Dev only
+
 ```
 ## BUG - Field Validation Rules
 ```sh
